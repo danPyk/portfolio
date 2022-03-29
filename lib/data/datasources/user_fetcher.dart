@@ -11,18 +11,17 @@ class UsersFetcher {
   UsersFetcher({required this.httpClient});
 
   Future<String> addUser(Map<String, dynamic> newUser) async {
-    final response = await http.post(
-        Uri.parse('${ApiConfig.host}/people/'),
+    final response = await http.post(Uri.parse('${ApiConfig.host}/people/'),
         headers: {'Application-Content': 'application/json'},
         body: jsonEncode(newUser));
 
     if (response.statusCode == 200) {
-
       return 'User added';
     } else {
       throw ServerException();
     }
   }
+
   Future<User> getUser(String id) async {
     final response =
         await http.get(Uri.parse('${ApiConfig.host}/people/id/$id/'));
@@ -35,32 +34,29 @@ class UsersFetcher {
       throw ServerException();
     }
   }
+
   Future<String> deleteUser(String id) async {
     final response =
         await http.delete(Uri.parse('${ApiConfig.host}/people/id/$id/'));
 
     if (response.statusCode == 200) {
-
       return 'Deleted successfully';
     } else {
       throw ServerException();
     }
   }
-  Future<String> updateUser( Map<String, dynamic> newUser) async {
-    final response = await http.patch(
-        Uri.parse('${ApiConfig.host}/people/'),
+
+  Future<String> updateUser(Map<String, dynamic> newUser) async {
+    final response = await http.patch(Uri.parse('${ApiConfig.host}/people/'),
         headers: {'Application-Content': 'application/json'},
         body: jsonEncode(newUser));
 
     if (response.statusCode == 200) {
-
       return 'User updated';
     } else {
       throw ServerException();
     }
   }
-
-
 
   String _encode(String component) => Uri.encodeComponent(component);
 }
