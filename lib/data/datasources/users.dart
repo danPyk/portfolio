@@ -5,10 +5,10 @@ import 'package:portfolio/app/api_config.dart';
 import 'package:portfolio/app/error/excpetions.dart';
 import 'package:portfolio/data/models/user.dart';
 
-class UsersFetcher {
+class Users {
   final http.Client httpClient;
 
-  UsersFetcher({required this.httpClient});
+  Users({required this.httpClient});
 
   Future<String> addUser(Map<String, dynamic> newUser) async {
     final response = await http.post(Uri.parse('${ApiConfig.host}/people/'),
@@ -58,5 +58,4 @@ class UsersFetcher {
     }
   }
 
-  String _encode(String component) => Uri.encodeComponent(component);
 }

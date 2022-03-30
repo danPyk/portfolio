@@ -2,10 +2,10 @@ import 'package:fpdart/fpdart.dart';
 import 'package:portfolio/app/error/failures.dart';
 import 'package:portfolio/data/models/user.dart';
 
-import '../datasources/user_fetcher.dart';
+import '../datasources/users.dart';
 
 class UserRepo {
-  final UsersFetcher dataSource;
+  final Users dataSource;
 
   UserRepo({required this.dataSource});
 
@@ -16,9 +16,12 @@ class UserRepo {
     } catch (e) {
       return Either.left(ServerFailure());
     }
-  }  Future<Either<Failure, String>> updateUser( Map<String, dynamic> newUser) async {
+  }
+
+  Future<Either<Failure, String>> updateUser(
+      Map<String, dynamic> newUser) async {
     try {
-      final result = await dataSource.updateUser( newUser);
+      final result = await dataSource.updateUser(newUser);
       return Either.right(result);
     } catch (e) {
       return Either.left(ServerFailure());
